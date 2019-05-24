@@ -42,7 +42,7 @@ public class Mysqljdbctest {
 
 	try {
 		connection = DriverManager
-		.getConnection("jdbc:mysql://172.25.33.149:3306/hive","hive", "hive");
+		.getConnection("jdbc:mysql://172.25.33.149:3306/hive","hive", "hive"); //Edit the JDBC connection string
 
 	} catch (SQLException e) {
 		System.setOut(fileOut);
