@@ -9,11 +9,11 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;  
 
-public class Mysqljdbctest {
+public class JDBCExample {
 
-  public static void main(String[] argv) throws FileNotFoundException {
+  public static void main(String[] argv) throws FileNotFoundException, SQLException {
 	  
-	File file = new File("/Users/tkandasamy/testjava/out.txt"); //Edit the location as required
+	File file = new File("/Users/tkandasamy/testjava/out.txt"); 
 	PrintStream fileOut = new PrintStream(file);  
 	
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -42,7 +42,8 @@ public class Mysqljdbctest {
 
 	try {
 		connection = DriverManager
-		.getConnection("jdbc:mysql://172.25.33.149:3306/hive","hive", "hive"); //Edit the JDBC connection string
+		.getConnection("jdbc:mysql://172.25.33.145:3306/hive","hive", "hive");
+		//connection.close();
 
 	} catch (SQLException e) {
 		System.setOut(fileOut);
@@ -50,6 +51,7 @@ public class Mysqljdbctest {
 		System.out.println("Connection Failed! Check output console");
 		e.printStackTrace(fileOut);
 		//fileOut.close();
+		
 		return;
 	}
 
@@ -58,14 +60,17 @@ public class Mysqljdbctest {
 		System.setOut(fileOut); 
 		System.out.println(dtf.format(now));
 		System.out.println("Connection Success");
-		//fileOut.close();
-	} else {
+			connection.close();
+	} 
+	else {
 		System.setOut(fileOut); 
 		System.out.println(dtf.format(now));
 		System.out.println("Failed to make connection!");
 		fileOut.close();
+		
 		System.exit(0);
 	}
 	}
+	
+	}
   }
-}
